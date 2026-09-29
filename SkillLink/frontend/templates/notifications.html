@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Notifications - SkillLink{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Notifications</h2>
+    
+    {% if notifications %}
+        {% for notification in notifications %}
+        <div class="notification-card {% if not notification.is_read %}unread{% endif %}">
+            <div style="white-space: pre-line;">{{ notification.message }}</div>
+            <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
+                <small style="color: #666;">{{ notification.created_at }}</small>
+                {% if not notification.is_read %}
+                    <form method="POST" action="{{ url_for('mark_notification_read', notification_id=notification.id) }}" style="display: inline;">
+                        <button type="submit" class="btn" style="padding: 5px 10px; font-size: 0.8rem;">Mark as Read</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div style="text-align: center; padding: 2rem; color: #666;">
+            <h3>No notifications</h3>
+            <p>You'll see notifications here when you receive job applications or new job postings.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

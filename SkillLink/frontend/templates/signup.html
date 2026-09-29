@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up - SkillLink{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Join SkillLink</h2>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+        <!-- Employer Signup -->
+        <div class="job-card">
+            <h3 style="text-align: center; color: #667eea;"> Employer</h3>
+            <p style="text-align: center; margin-bottom: 1.5rem;">Post jobs and find candidates</p>
+            <form method="POST">
+                <input type="hidden" name="role" value="employer">
+                <div class="form-group">
+                    <label for="employer_email">Email Address</label>
+                    <input type="email" id="employer_email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="employer_password">Password</label>
+                    <input type="password" id="employer_password" name="password" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Sign Up as Employer</button>
+            </form>
+        </div>
+
+        <!-- Job Seeker Signup -->
+        <div class="job-card">
+            <h3 style="text-align: center; color: #667eea;">Job Seeker</h3>
+            <p style="text-align: center; margin-bottom: 1.5rem;">Find and apply for jobs</p>
+            <form method="POST">
+                <input type="hidden" name="role" value="worker">
+                <div class="form-group">
+                    <label for="worker_email">Email Address</label>
+                    <input type="email" id="worker_email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="worker_password">Password</label>
+                    <input type="password" id="worker_password" name="password" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Sign Up as Job Seeker</button>
+            </form>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="{{ url_for('login') }}" class="btn btn-secondary">Already have an account? Login</a>
+    </div>
+</div>
+
+<style>
+@media (max-width: 768px) {
+    .container > div {
+        grid-template-columns: 1fr !important;
+    }
+}
+</style>
+{% endblock %}

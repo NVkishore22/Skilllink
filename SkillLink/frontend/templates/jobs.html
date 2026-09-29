@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Jobs - SkillLink{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Available Jobs</h2>
+    
+    <form method="GET" class="search-form">
+        <div class="search-row">
+            <div class="form-group">
+                <label for="title">Job Title</label>
+                <input type="text" id="title" name="title" value="{{ request.args.get('title', '') }}">
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" value="{{ request.args.get('location', '') }}">
+            </div>
+            <button type="submit" class="btn">Search</button>
+        </div>
+    </form>
+
+    {% if jobs %}
+        {% for job in jobs %}
+        <div class="job-card">
+            <div class="job-title">{{ job.title }}</div>
+            <div class="job-location"> {{ job.location }}</div>
+            <div class="job-description">{{ job.description }}</div>
+            {% if current_user.is_authenticated and current_user.role == 'worker' %}
+                <button onclick="applyJob('{{ job.id }}')" class="btn">Apply Now</button>
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% else %}
+        <div style="text-align: center; padding: 2rem; color: #666;">
+            <h3>No jobs found</h3>
+            <p>Try adjusting your search criteria or check back later for new opportunities.</p>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+function applyJob(jobId) {
+    fetch(`/jobs/${jobId}/apply`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'}
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'Error') {
+            alert(data.message);
+            window.location.href = '/profile';
+        } else {
+            alert('Application submitted successfully!');
+        }
+    });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <h1>Welcome to SkillLink</h1>
+    <p>Connect employers with job seekers through our Web-based job portal </p>
+    {% if not current_user.is_authenticated %}
+        <a href="{{ url_for('signup') }}" class="btn">Get Started</a>
+        <a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a>
+    {% else %}
+        <a href="{{ url_for('jobs') }}" class="btn">Browse Jobs</a>
+        {% if current_user.role == 'employer' %}
+            <a href="{{ url_for('post_job') }}" class="btn btn-secondary">Post a Job</a>
+        {% endif %}
+    {% endif %}
+</div>
+
+<div id="about" style="max-width: 900px; margin: 50px auto; padding: 0;">
+    <div style="background: linear-gradient(135deg, #317bf3 0%, #7ca6ee 100%); padding: 50px 40px; border-radius: 15px 15px 0 0; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+        <h2 style="color: white; font-size: 2.5em; margin: 0 0 15px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">About SkillLink</h2>
+        <p style="color: rgba(255,255,255,0.95); font-size: 1.2em; line-height: 1.6; max-width: 700px; margin: 0 auto;">Bridging the gap between talented Workers and Job providers through Easy connections and real-time communication.</p>
+    </div>
+    
+    <div style="background: white; padding: 40px; border-radius: 0 0 15px 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+        <h3 style="color: #6d9ef9; font-size: 1.8em; margin: 0 0 30px 0; text-align: center; border-bottom: 3px solid #2a5298; padding-bottom: 10px; display: inline-block; width: 100%;">Key Features</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px;">
+            <div style="padding: 20px; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 10px; border-left: 4px solid #1e3c72;">
+                <strong style="color: #6a81ab; font-size: 1.1em;">Phone-Based Authentication</strong>
+                <p style="color: #407ee8; margin: 10px 0 0 0; line-height: 1.5;">Simple and secure login without complex verification</p>
+            </div>
+            <div style="padding: 20px; background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%); border-radius: 10px; border-left: 4px solid #2a5298;">
+                <strong style="color: #1e3c72; font-size: 1.1em;">Role-Based Profiles</strong>
+                <p style="color: #2a5298; margin: 10px 0 0 0; line-height: 1.5;">Tailored interfaces for employers and job seekers</p>
+            </div>
+            <div style="padding: 20px; background: linear-gradient(135deg, #bbdefb 0%, #90caf9 100%); border-radius: 10px; border-left: 4px solid #1565c0;">
+                <strong style="color: #0d47a1; font-size: 1.1em;">Easy Job Applications</strong>
+                <p style="color: #1565c0; margin: 10px 0 0 0; line-height: 1.5;">Post jobs and apply with just one click</p>
+            </div>
+            <div style="padding: 20px; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); border-radius: 10px; border-left: 4px solid #64b5f6;">
+                <strong style="color: #fff; font-size: 1.1em;">Real-Time Notifications</strong>
+                <p style="color: #e3f2fd; margin: 10px 0 0 0; line-height: 1.5;">Get instant alerts for new jobs and applications</p>
+            </div>
+            <div style="padding: 20px; background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%); border-radius: 10px; border-left: 4px solid #1976d2;">
+                <strong style="color: #1e3c72; font-size: 1.1em;">Direct Contact</strong>
+                <p style="color: #2a5298; margin: 10px 0 0 0; line-height: 1.5;">Communication via phone and email</p>
+            </div>
+        </div>
+        
+        <h3 style="color: #1e3c72; font-size: 1.8em; margin: 40px 0 30px 0; text-align: center; border-bottom: 3px solid #2a5298; padding-bottom: 10px; display: inline-block; width: 100%;">How It Works</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <div style="padding: 30px; background: linear-gradient(135deg, #e3f2fd 0%, #90caf9 100%); border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <h4 style="color: #0d47a1; font-size: 1.4em; margin: 0 0 15px 0;">For Job Seekers</h4>
+                <p style="color: #1565c0; line-height: 1.7; margin: 0;">Create your profile, browse available jobs, apply to positions that match your skills, and receive notifications when employers review your application.</p>
+            </div>
+            <div style="padding: 30px; background: linear-gradient(135deg, #bbdefb 0%, #64b5f6 100%); border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <h4 style="color: #0d47a1; font-size: 1.4em; margin: 0 0 15px 0;">For Employers</h4>
+                <p style="color: #1565c0; line-height: 1.7; margin: 0;">Post job openings, receive applications with complete candidate details including contact information, and connect directly with potential hires.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Post Job - SkillLink{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Post a New Job</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="title">Job Title</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Job Description</label>
+            <textarea id="description" name="description" rows="6" required></textarea>
+        </div>
+        <button type="submit" class="btn">Post Job</button>
+        <a href="{{ url_for('jobs') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}
